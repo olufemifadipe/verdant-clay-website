@@ -1,0 +1,21 @@
+VERDANT CLAY KY — WEBSITE PREVIEW
+
+HOW TO OPEN
+1. Extract this ZIP first (Windows: right-click > Extract All).
+2. Open index.html in Chrome, Safari, Edge, or Firefox.
+3. Keep the files and assets folder together.
+
+FILES
+index.html — page content
+styles.css — design and responsive layout
+app.js — collection filtering and product details
+favicon.svg — browser icon
+assets/collection.png — supplied product imagery
+
+The site works without a build step. An internet connection loads the optional Google fonts and opens Instagram/WhatsApp links. WhatsApp buttons prepare enquiries; visitors choose whether to send them.
+
+FOR THE BUSINESS OWNER
+This is a design preview. Product photos were taken from the screenshots provided; original high-resolution photos would improve the final site. Please confirm product names, descriptions, WhatsApp details, and availability before a public launch. Prices and checkout are not included.
+
+HOSTING
+Upload the website files, keeping the folder structure intact, to any static website host. index.html should be at the site root. No ChatGPT login or paid framework is required to open these exported files.

@@ -1,0 +1,16 @@
+const pieces=[
+ {name:'Adria',category:'sculptural',label:'Sculptural · Ivory',x:29,y:25,description:'Soft ivory shapes and cascading details. A statement pair with its own quiet confidence.'},
+ {name:'Mila',category:'everyday',label:'Everyday · Olive & ivory',x:466,y:25,description:'An earthy olive finish with a soft ivory stud. A little colour for your everyday.'},
+ {name:'Eden',category:'sculptural',label:'Sculptural · Ocean blue',x:685,y:25,description:'Textured blue clay, a sculptural silhouette, and a playful circular detail.'},
+ {name:'Clara',category:'botanical',label:'Botanical · Berry & ivory',x:466,y:316,description:'Berry-toned studs meet ivory drops with a delicate botanical impression.'},
+ {name:'Roselle',category:'botanical',label:'Botanical · Pink & ivory',x:685,y:316,description:'Layered leaf shapes in pink and ivory. A playful, nature-inspired detail.'},
+ {name:'Koko',category:'everyday',label:'Everyday · Black & ivory',x:1122,y:25,description:'A bold oval shape with contrasting black and ivory details. Simple colours, plenty of character.'}
+];
+function placePhotos(root=document){root.querySelectorAll('.photo').forEach(p=>{const x=Number(p.dataset.x),y=Number(p.dataset.y);p.style.backgroundPosition=`${x/(1345-218)*100}% ${y/(888-291)*100}%`;});}
+const grid=document.querySelector('#products');
+function render(filter='all'){const items=pieces.filter(p=>filter==='all'||p.category===filter);grid.innerHTML=items.map(p=>`<button class="product" data-name="${p.name}" aria-label="View ${p.name} earrings"><div class="photo" role="img" aria-label="${p.name} handcrafted clay earrings" data-x="${p.x}" data-y="${p.y}"></div><div class="product-info"><h3>${p.name}</h3><span aria-hidden="true">↗</span></div><p>${p.label}</p></button>`).join('');document.querySelector('#piece-count').textContent=`${items.length} pieces to explore`;placePhotos(grid);}
+document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-pressed',String(x===b));});render(b.dataset.filter);}));
+const dialog=document.querySelector('dialog');
+grid.addEventListener('click',e=>{const button=e.target.closest('[data-name]');if(!button)return;const p=pieces.find(x=>x.name===button.dataset.name);document.querySelector('#dialog-content').innerHTML=`<div class="photo" role="img" aria-label="${p.name} earrings" data-x="${p.x}" data-y="${p.y}"></div><div class="detail-copy"><p class="eyebrow">HANDCRAFTED IN CAYMAN</p><h2>${p.name}</h2><p>${p.description}</p><p class="availability">Please message us for current colours, pricing, and availability.</p><a class="button" href="https://wa.me/13453297609?text=${encodeURIComponent(`Hi Verdant Clay KY! I'm interested in the ${p.name} earrings. Could you share pricing and availability?`)}" target="_blank" rel="noopener">Ask about ${p.name} ↗</a></div>`;placePhotos(dialog);dialog.showModal();});
+document.querySelector('.close-dialog').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
+document.querySelector('#year').textContent=new Date().getFullYear();render();placePhotos();
